@@ -1,0 +1,10 @@
+version: "3"
+services:
+  web:
+    build: .
+    ports:
+      - "7007:7007"
+    working_dir: /home
+    volumes:
+      - .:/home
+      - D:\Prj\IGCM\Datasets2:/home/src/static
