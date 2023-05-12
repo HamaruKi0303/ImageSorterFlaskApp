@@ -7,4 +7,6 @@ RUN python -m pip install --upgrade pip
 
 RUN pip install flask
 
+USER root
+
 CMD [ "python", "src/app.py" ]

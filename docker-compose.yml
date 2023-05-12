@@ -1,10 +1,40 @@
 version: "3"
 services:
-  web:
+  app-real:
     build: .
     ports:
       - "7007:7007"
     working_dir: /home
     volumes:
       - .:/home
-      - D:\Prj\IGCM\Datasets2:/home/src/static
+      # - D:\Prj\IGCM\Datasets2:/home/src/static
+      # - Z:\IGCM\Datasets2:/home/src/static
+      - cifs_mount_real:/home/src/static
+  app-anime:
+    build: .
+    ports:
+      - "7008:7007"
+    working_dir: /home
+    environment:
+      - PUID=0
+      - PGID=0
+    user: root
+    volumes:
+      - .:/home
+      # - D:\Prj\IGCM\Datasets2A:/home/src/static
+      # - Z:\IGCM\Datasets2A:/home/src/static
+      - cifs_mount_anime:/home/src/static
+
+volumes:
+  cifs_mount_anime:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: username=harum,password=(Upa0729,vers=3.0,uid=0,gid=0
+      device: //192.168.0.127/Prj/IGCM/Datasets2A
+  cifs_mount_real:
+    driver: local
+    driver_opts:
+      type: cifs
+      o: username=harum,password=(Upa0729,vers=3.0,uid=0,gid=0
+      device: //192.168.0.127/Prj/IGCM/Datasets2
