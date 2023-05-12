@@ -25,9 +25,9 @@ def index():
         if(image.endswith(".jpg") or image.endswith(".png")):
             image_path = f"{IMG_FOLDER}/{concept}/{image}"
         else:
-            image_path = None
+            image_path = "None"
     else:
-        image_path = None
+        image_path = "None"
 
     concepts = os.listdir(os.path.join(ROOT_PATH, IMG_FOLDER))
     image_counts = {c: get_image_counts(c) for c in concepts}
@@ -45,7 +45,10 @@ def sort():
     os.makedirs(dest_dir, exist_ok=True)
     dest_path = os.path.join(dest_dir, image)
 
-    os.rename(source_path, dest_path)
+    try:
+        os.rename(source_path, dest_path)
+    except:
+        pass
 
     # 画像がなくなったらフォルダ名にアンダーバーを付与
     remaining_images = os.listdir(os.path.join(ROOT_PATH, IMG_FOLDER, concept))

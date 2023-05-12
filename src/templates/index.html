@@ -12,7 +12,7 @@
     <div class="container">
         <h1 class="text-center my-4">画像分類ダッシュボード</h1>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-10">
                 <h2 class="my-4">{{ concept }}</h2>
                 {% if image_path %}
                 <img src="{{ image_path }}" alt="画像" class="img-fluid">
@@ -27,6 +27,17 @@
                 {% else %}
                 <p>画像が見つかりませんでした。</p>
                 {% endif %}
+            </div>
+            
+            <div class="col-md-2">
+                <form action="{{ url_for('sort') }}" method="post" class="my-4">
+                    <input type="hidden" name="concept" value="{{ concept }}">
+                    <input type="hidden" name="image" value="{{ image_path.split('/')[-1] }}">
+                    <button type="submit" name="button" value="OK" class="btn btn-success">OK</button>
+                    <button type="submit" name="button" value="NG" class="btn btn-danger">NG</button>
+                    <button type="submit" name="button" value="R18" class="btn btn-warning">R18</button>
+                    <button type="submit" name="button" value="R20" class="btn btn-info">R20</button>
+                </form>
             </div>
 
             <div class="col-md-12">
